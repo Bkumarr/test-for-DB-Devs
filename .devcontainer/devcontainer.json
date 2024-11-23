@@ -1,9 +1,13 @@
 {
-"name": "Ubuntu",
+	
+	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/devcontainers/base:jammy",
+    // "image": "mcr.microsoft.com/devcontainers/base:jammy",
 //  "image": "mcr.microsoft.com/devcontainers/dotnet:7.0",
 //  "image": "mcr.microsoft.com/vscode/devcontainers/base:0-hirsute",
+    "dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
 "features": {
 	"ghcr.io/devcontainers-contrib/features/npm-package:1": {
 		"package": "typescript",
@@ -29,8 +33,23 @@
 			"ms-azuretools.vscode-azurefunctions",
 			"ms-vscode.azure-account",
 			"ms-azuretools.vscode-azureresourcegroups",
-			"humao.rest-client"
-		]
+			"humao.rest-client",
+			"dbaeumer.vscode-eslint",
+			"mtxr.sqltools",
+			"mtxr.sqltools-driver-pg"
+		],
+		"settings": {
+		"sqltools.connections": [{
+			"name": "Container database",
+			"driver": "PostgreSQL",
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 5432,
+			"database": "postgres",
+			"username": "postgres",
+			"password": "postgres"
+		}]
+	}
 	}
 }
 }
