@@ -9,7 +9,7 @@ FROM bitnami/$IMAGE:$TAG as builder
 ARG STAGEPATH
 
 # user root is required for installing packages
-User root
+USER root
 # install build essentials
 RUN install_packages build-essential unixodbc-dev curl gnupg2
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
