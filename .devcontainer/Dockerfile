@@ -9,6 +9,8 @@ FROM bitnami/$IMAGE:$TAG as builder
 ARG STAGEPATH
 
 # user root is required for installing packages
+USER root
+
 ARG USER_ONBUILD=Bkumarr
 ARG UID_ONBUILD=999
 ARG GROUP_ONBUILD=Bkumarr
@@ -21,7 +23,7 @@ RUN umask 0002 && \
     chmod -R 777 /opt && \
     chown -R ${USER_ONBUILD}:${GROUP_ONBUILD} /opt
 
-USER root
+
 # install build essentials
 RUN install_packages build-essential unixodbc-dev curl gnupg2
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
