@@ -18,21 +18,20 @@ RUN umask 0002 && \
     grep -E "^UMASK" /etc/login.defs && \
     groupadd -g ${GID_ONBUILD} ${GROUP_ONBUILD} && \
     useradd --shell /bin/bash -u ${UID_ONBUILD} -g ${GID_ONBUILD} -o -c "" -m ${USER_ONBUILD} && \
-    chmod -R 2775 /opt && \
+    chmod -R 777 /opt && \
     chown -R ${USER_ONBUILD}:${GROUP_ONBUILD} /opt
 
 USER root
 # install build essentials
-RUN umask 0002 && \
-    install_packages build-essential unixodbc-dev curl gnupg2 && \
-    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
-    curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN install_packages build-essential unixodbc-dev curl gnupg2
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
 
 # make paths, including apt archives or the download-only fails trying to cleanup
-RUN mkdir -p $STAGEPATH/deb; mkdir -p /var/cache/apt/archives
-
-# download-only msodbcsql17 to directory
-RUN install_packages -y -d -o=dir::cache=$STAGEPATH/deb -o Debug::NoLocking=1 msodbcsql17
+RUN mkdir -p $STAGEPATH/deb; mkdir -p /var/cache/apt/archives && \
+    umask 0002 && \
+    install_packages -y -d -o=dir::cache=$STAGEPATH/deb -o Debug::NoLocking=1 msodbcsql17
+# download-only msodbcsql17 to directorY
 
 # download & build pip wheels to directory
 RUN mkdir -p $STAGEPATH/pip-wheels
@@ -73,5 +72,5 @@ RUN . /opt/bitnami/airflow/venv/bin/activate && python -m pip install --upgrade 
     apache-airflow-providers-microsoft-azure
 
 # return to previous non-root user
-USER Bkumarr:Bkumarr
+USER Bkumarr
 
