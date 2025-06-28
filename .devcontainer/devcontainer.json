@@ -2,11 +2,12 @@
 	
 	"name": "Ubuntu",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    // "image": "mcr.microsoft.com/devcontainers/base:jammy",
+ //   "image": "mcr.microsoft.com/devcontainers/base:jammy",
 //  "image": "mcr.microsoft.com/devcontainers/dotnet:7.0",
 //  "image": "mcr.microsoft.com/vscode/devcontainers/base:0-hirsute",
     "dockerComposeFile": "docker-compose.yml",
 	"service": "app",
+	"forwardPorts": 5432,
 	"workspaceFolder": "/workspace",
 "features": {
 	"ghcr.io/devcontainers-contrib/features/npm-package:1": {
@@ -39,6 +40,7 @@
 			"mtxr.sqltools-driver-pg"
 		],
 		"settings": {
+		"terminal.integrated.defaultProfile.linux": "bash",
 		"sqltools.connections": [{
 			"name": "Container database",
 			"driver": "PostgreSQL",
