@@ -7,7 +7,7 @@
 //  "image": "mcr.microsoft.com/vscode/devcontainers/base:0-hirsute",
     "dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"forwardPorts": 5432,
+	"forwardPorts": ["5432"],
 	"workspaceFolder": "/workspace",
 "features": {
 	"ghcr.io/devcontainers-contrib/features/npm-package:1": {
