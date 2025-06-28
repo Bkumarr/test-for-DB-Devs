@@ -74,5 +74,5 @@ RUN . /opt/bitnami/airflow/venv/bin/activate && python -m pip install --upgrade 
     apache-airflow-providers-microsoft-azure
 
 # return to previous non-root user
-USER Bkumarr
+
 
